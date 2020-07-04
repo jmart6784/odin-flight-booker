@@ -1,0 +1,77 @@
+<%= link_to flights_path do %>
+  <h1>Flights index</h1>
+<% end %>
+
+<%= form_tag flights_path, method: :get do %>
+  <%= label_tag "search_flights[start_date]", "Flight date" %>
+  <%= select_tag "search_flights[start_date]", options_for_select(@valid_dates) %><br>
+
+  <%= label_tag "search_flights[departure_id]", "From:" %>
+  <%= select_tag "search_flights[departure_id]", options_for_select(@airports) %><br>
+
+  <%= label_tag "search_flights[arrival_id]", "To:" %>
+  <%= select_tag "search_flights[arrival_id]", options_for_select(@airports) %><br>
+
+  <%= submit_tag "Search" %>
+<% end %>
+
+
+<% if @search_results.try(:any?) %>
+  <table>
+    <thead>
+      <tr>
+      <th>Departing</th>
+      <th>Arriving</th>
+      <th>Departing date</th>
+      <th>time</th>
+      <th>Arriving date</th>
+      <th>time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @search_results.each do |flight| %>
+        <tr>
+        <td><%= Airport.find(flight.departure_id).code %></td>
+        <td><%= Airport.find(flight.arrival_id).code %></td>
+        <td><%= flight.start_date.strftime("%B %d %Y") %></td>
+        <td><%= flight.start_time.strftime("%l:%M%p") %></td>
+        <td><%= flight.end_date.strftime("%B %d %Y") %></td>
+        <td><%= flight.end_time.strftime("%l:%M%p") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% elsif @search_nil == true %>
+  <h1>No flights found</h1>
+<% else %>
+  <h1>Search for flights!</h1>
+<% end %>
+
+<br><br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Departing</th>
+      <th>Arriving</th>
+      <th>Departing date</th>
+      <th>time</th>
+      <th>Arriving date</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |flight| %>
+      <tr>
+        <td><%= Airport.find(flight.departure_id).code %></td>
+        <td><%= Airport.find(flight.arrival_id).code %></td>
+        <td><%= flight.start_date.strftime("%B %d %Y") %></td>
+        <td><%= flight.start_time.strftime("%l:%M%p") %></td>
+        <td><%= flight.end_date.strftime("%B %d %Y") %></td>
+        <td><%= flight.end_time.strftime("%l:%M%p") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @flights, inner_window: 1, outer_window: 0, :previous_label => '◀', :next_label => '▶' %>

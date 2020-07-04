@@ -12,8 +12,8 @@ airport_collection = [
 ]
 
 valid_pairs = []
-# Pair up valid pairs of Airports 5000 times
-5000.times do
+# Pair up valid pairs of Airports 100000 times
+100000.times do
   from = airport_collection[rand(0..9)]
   to = airport_collection[rand(0..9)]
 
@@ -36,8 +36,8 @@ valid_pairs.each do |valid_pair|
   Flight.create!(
     departure_id: from.id, arrival_id: to.id, 
     start_date: Date.today + r_days.days, 
-    start_time: (Date.today + r_days.days + r_hours.hours + r_minutes.minutes).strftime("%H:%M:%S"), 
-    end_date: (Date.today + r_days.days + r_hours.hours + r_minutes.minutes + r_duration.hours).strftime("%Y-%m-%d"), 
-    end_time: (Date.today + r_days.days + r_hours.hours + r_minutes.minutes + r_duration.hours).strftime("%H:%M:%S")
+    start_time: Date.today + r_days.days + r_hours.hours + r_minutes.minutes,  
+    end_date: Date.today + r_days.days + r_hours.hours + r_minutes.minutes + r_duration.hours, 
+    end_time: Date.today + r_days.days + r_hours.hours + r_minutes.minutes + r_duration.hours
   )
 end
