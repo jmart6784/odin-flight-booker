@@ -12,7 +12,14 @@
   <%= label_tag "search_flights[arrival_id]", "To:" %>
   <%= select_tag "search_flights[arrival_id]", options_for_select(@airports) %><br>
 
+  <%= label_tag "search_flights[passengers]", "Passengers" %>
+  <%= select_tag "search_flights[passengers]", options_for_select(@passengers) %><br>
+
   <%= submit_tag "Search" %>
+<% end %>
+
+<% if params[:search_flights] %>
+  <h1><%= params[:search_flights] %></h1>
 <% end %>
 
 
