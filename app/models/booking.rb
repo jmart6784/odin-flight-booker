@@ -1,6 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :flight
-  has_and_belongs_to_many :passengers
+  has_many :passengers, dependent: :destroy
   accepts_nested_attributes_for :passengers
 
   validates :passenger_id, :flight_id, presence: true

@@ -11,7 +11,7 @@ class FlightsController < ApplicationController
         start_date: params[:search_flights][:start_date],
         departure_id: params[:search_flights][:departure_id],
         arrival_id: params[:search_flights][:arrival_id]
-      )
+      ).paginate(page: params[:page], per_page: 10)
 
       if @search_results.count == 0
         @search_nil = true
@@ -21,11 +21,5 @@ class FlightsController < ApplicationController
     end
 
     @passengers = [1, 2, 3, 4]
-  end
-
-  private
-
-  def search_params
-    params.require(:search_flights).permit(:start_date, :departure_id, :arrival_id)
   end
 end

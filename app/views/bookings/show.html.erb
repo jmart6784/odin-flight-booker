@@ -1,0 +1,23 @@
+<h1>Show Booking</h1>
+
+<h3>Booking ID: <%= @booking.id %></h3>
+<h3>Flight ID: <%= @flight.id %></h3>
+
+<h3>From: <%= Airport.find(@flight.departure_id).code %></h3>
+<h3>To: <%= Airport.find(@flight.arrival_id).code %></h3>
+<h3>
+  Departure: 
+  <%= @flight.start_date.strftime("%B %d %Y") %> 
+  <%= @flight.start_time.strftime("%l:%M%p") %>
+</h3>
+
+<h3>
+  Arrival: 
+  <%= @flight.end_date.strftime("%B %d %Y") %> 
+  <%= @flight.end_time.strftime("%l:%M%p") %>
+</h3>
+
+<h2>Passenger info</h2>
+
+<h3>Name: <%= @passenger.name %></h3>
+<h3>Email: <%= @passenger.email %></h3>
