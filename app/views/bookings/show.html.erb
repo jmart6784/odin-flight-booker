@@ -19,5 +19,7 @@
 
 <h2>Passenger info</h2>
 
-<h3>Name: <%= @passenger.name %></h3>
-<h3>Email: <%= @passenger.email %></h3>
+<% @booking.passengers.each do |passenger| %>
+  <h3>Name: <%= passenger.name %></h3>
+  <h3>Email: <%= passenger.email %></h3>
+<% end %>

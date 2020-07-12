@@ -1,7 +1,7 @@
 <h1>New Booking</h1>
 
 <h3>Flight ID: <%= params[:booking][:flight_id].to_i %></h3>
-<h3>Passengers: <%= params[:passengers] %></h3>
+<h3>Passengers: <%= passengers = params[:passengers].to_i %></h3>
 
 <% flight = Flight.find(params[:booking][:flight_id].to_i) %>
 
@@ -16,15 +16,25 @@
 
 <%= form_with model: @booking, method: :post do |f| %>
 
-  <%= fields_for :passengers do |passenger| %>
-    <%= passenger.label :name %>
-    <%= passenger.text_field :name %>
-    <br>
-    <%= passenger.label :email %>
-    <%= passenger.email_field :email %>
+  <% count = 0 %>
+  <% passengers.times do %>
+    <% count += 1 %>
+
+    <%= fields_for ("passengers[pass#{count}]") do |passenger| %>
+        <div>
+          <h3>Passenger <%= count %>:</h3>
+          <%= passenger.label :name %>
+          <%= passenger.text_field :name %>
+          <br>
+          <%= passenger.label :email %>
+          <%= passenger.email_field :email %>
+        </div>
+        <br>
+    <% end %>
 
   <% end %>
 
+  <%= hidden_field_tag :num_passengers, passengers %>
   <%= hidden_field_tag :flight_id, flight.id %>
   <br>
   <%= f.submit %>
