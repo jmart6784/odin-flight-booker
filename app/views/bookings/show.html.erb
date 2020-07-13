@@ -1,25 +1,31 @@
-<h1>Show Booking</h1>
+<div id="s-b-container">
+  <div class="s-b-info">
+    <h1 class="s-b-title">Booking information</h1>
 
-<h3>Booking ID: <%= @booking.id %></h3>
-<h3>Flight ID: <%= @flight.id %></h3>
+    <h3>Booking ID: <%= @booking.id %></h3>
+    <h3>Flight ID: <%= @flight.id %></h3>
 
-<h3>From: <%= Airport.find(@flight.departure_id).code %></h3>
-<h3>To: <%= Airport.find(@flight.arrival_id).code %></h3>
-<h3>
-  Departure: 
-  <%= @flight.start_date.strftime("%B %d %Y") %> 
-  <%= @flight.start_time.strftime("%l:%M%p") %>
-</h3>
+    <h3>From: <%= Airport.find(@flight.departure_id).code %></h3>
+    <h3>To: <%= Airport.find(@flight.arrival_id).code %></h3>
+    <h3>
+      Departing: 
+      <%= @flight.start_date.strftime("%B %d %Y") %> 
+      <%= @flight.start_time.strftime("%l:%M%p") %>
+    </h3>
 
-<h3>
-  Arrival: 
-  <%= @flight.end_date.strftime("%B %d %Y") %> 
-  <%= @flight.end_time.strftime("%l:%M%p") %>
-</h3>
+    <h3>
+      Arriving: 
+      <%= @flight.end_date.strftime("%B %d %Y") %> 
+      <%= @flight.end_time.strftime("%l:%M%p") %>
+    </h3>
+  </div>
 
-<h2>Passenger info</h2>
+  <div class="s-b-info">
+    <h1 class="s-b-title">Passengers</h1>
 
-<% @booking.passengers.each do |passenger| %>
-  <h3>Name: <%= passenger.name %></h3>
-  <h3>Email: <%= passenger.email %></h3>
-<% end %>
+    <% @booking.passengers.each do |passenger| %>
+      <h3>Name: <%= passenger.name %></h3>
+      <h3>Email: <%= passenger.email %></h3>
+    <% end %>
+  </div>
+</div>
