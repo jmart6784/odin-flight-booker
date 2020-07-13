@@ -4,12 +4,33 @@
   <thead>
     <tr>
       <th>Booking ID</th>
+      <th>Flight ID</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Leaving</th>
+      <th>Arriving</th>
+      <th>Passenger count</th>
     </tr>
   </thead>
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
         <td><%= booking.id %></td>
+        <td><%= Flight.find(booking.flight_id).id %></td>
+        <td>
+          <%= Airport.find(Flight.find(booking.flight_id).departure_id).code %>
+        </td>
+        <td>
+          <%= Airport.find(Flight.find(booking.flight_id).arrival_id).code %>
+        </td>
+        <td>
+          <%= Flight.find(booking.flight_id).start_date.strftime("%B %d %Y") + " " + Flight.find(booking.flight_id).start_time.strftime("%l:%M%p") %>
+        </td>
+        <td>
+          <%= Flight.find(booking.flight_id).end_date.strftime("%B %d %Y") + " " + Flight.find(booking.flight_id).end_time.strftime("%l:%M%p") %>
+        </td>
+        <td><%= booking.passengers.count %></td>
+        <td><%= link_to "Show", booking %></td>
       </tr>
     <% end %>
   </tbody>

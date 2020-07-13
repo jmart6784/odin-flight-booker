@@ -22,27 +22,27 @@
     <table>
       <thead>
         <tr>
-        <th></th>
-        <th>Departing</th>
-        <th>Arriving</th>
-        <th>Departing date</th>
-        <th>time</th>
-        <th>Arriving date</th>
-        <th>time</th>
+          <th></th>
+          <th>Departing</th>
+          <th>Arriving</th>
+          <th>Leaving</th>
+          <th>Arriving</th>
         </tr>
       </thead>
       <tbody>
         <% @search_results.each do |flight| %>
           <tr>
-          <td>
-            <%= radio_button_tag "booking[flight_id]", flight.id %>
-          </td>
-          <td><%= Airport.find(flight.departure_id).code %></td>
-          <td><%= Airport.find(flight.arrival_id).code %></td>
-          <td><%= flight.start_date.strftime("%B %d %Y") %></td>
-          <td><%= flight.start_time.strftime("%l:%M%p") %></td>
-          <td><%= flight.end_date.strftime("%B %d %Y") %></td>
-          <td><%= flight.end_time.strftime("%l:%M%p") %></td>
+            <td>
+              <%= radio_button_tag "booking[flight_id]", flight.id %>
+            </td>
+            <td><%= Airport.find(flight.departure_id).code %></td>
+            <td><%= Airport.find(flight.arrival_id).code %></td>
+            <td>
+              <%= flight.start_date.strftime("%B %d %Y") + " " + flight.start_time.strftime("%l:%M%p") %>
+            </td>
+            <td>
+              <%= flight.end_date.strftime("%B %d %Y") + " " + flight.end_time.strftime("%l:%M%p") %>
+            </td>
           </tr>
         <% end %>
       </tbody>
