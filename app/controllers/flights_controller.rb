@@ -1,6 +1,6 @@
 class FlightsController < ApplicationController
   def index
-    @flights = Flight.all.order("start_date ASC").paginate(page: params[:page], per_page: 50)
+    @flights = Flight.all.order("start_date ASC")
 
     @valid_dates ||= Flight.all.order(:start_date).distinct.pluck(:start_date).map! {|date| [date.strftime("%B %d %Y"), date] }
 

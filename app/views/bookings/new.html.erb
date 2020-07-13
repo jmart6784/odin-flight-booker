@@ -1,42 +1,49 @@
-<h1>New Booking</h1>
+<div id="n-booking-container">
+  <div id="n-b-left">
+    <h1 id="n-b-title">New Booking</h1>
 
-<h3>Flight ID: <%= params[:booking][:flight_id].to_i %></h3>
-<h3>Passengers: <%= passengers = params[:passengers].to_i %></h3>
+    <h3>Flight ID: <%= params[:booking][:flight_id].to_i %></h3>
+    <h3>Passengers: <%= passengers = params[:passengers].to_i %></h3>
 
-<% flight = Flight.find(params[:booking][:flight_id].to_i) %>
+    <% flight = Flight.find(params[:booking][:flight_id].to_i) %>
 
-<h3>From: <%= Airport.find(flight.departure_id).code %></h3>
-<h3>To: <%= Airport.find(flight.arrival_id).code %></h3>
-<h3>
-  Leaving: <%= "#{flight.start_date.strftime("%B %d %Y")} #{flight.start_time.strftime("%l:%M%p")}" %>
-  </h3>
-<h3>
-  Arriving: <%= "#{flight.end_date.strftime("%B %d %Y")} #{flight.end_time.strftime("%l:%M%p")}" %>
-</h3>
+    <h3>From: <%= Airport.find(flight.departure_id).code %></h3>
+    <h3>To: <%= Airport.find(flight.arrival_id).code %></h3>
+    <h3>
+      Departing: <%= "#{flight.start_date.strftime("%B %d %Y")} #{flight.start_time.strftime("%l:%M%p")}" %>
+      </h3>
+    <h3>
+      Arriving: <%= "#{flight.end_date.strftime("%B %d %Y")} #{flight.end_time.strftime("%l:%M%p")}" %>
+    </h3>
+  </div>
 
-<%= form_with model: @booking, method: :post do |f| %>
+  <div id="n-b-right">
+    <%= form_with model: @booking, method: :post do |f| %>
 
-  <% count = 0 %>
-  <% passengers.times do %>
-    <% count += 1 %>
+      <% count = 0 %>
+      <% passengers.times do %>
+        <% count += 1 %>
 
-    <%= fields_for ("passengers[pass#{count}]") do |passenger| %>
-        <div>
-          <h3>Passenger <%= count %>:</h3>
-          <%= passenger.label :name %>
-          <%= passenger.text_field :name %>
-          <br>
-          <%= passenger.label :email %>
-          <%= passenger.email_field :email %>
-        </div>
+      <div id="form-grid">
+        <%= fields_for ("passengers[pass#{count}]") do |passenger| %>
+            <div class="one-pass-form">
+              <h3 class="n-b-passenger">Passenger <%= count %>:</h3>
+              <%= passenger.label :name, class: "n-b-label" %>
+              <%= passenger.text_field :name, class: "n-b-field" %>
+              <br>
+              <%= passenger.label :email, class: "n-b-label" %>
+              <%= passenger.email_field :email, class: "n-b-field" %>
+            </div>
+        <% end %>
+
+        <% end %>
+
+        <%= hidden_field_tag :num_passengers, passengers %>
+        <%= hidden_field_tag :flight_id, flight.id %>
         <br>
+        <%= f.submit "Book Now", id: "book-now" %>
+      </div>
+
     <% end %>
-
-  <% end %>
-
-  <%= hidden_field_tag :num_passengers, passengers %>
-  <%= hidden_field_tag :flight_id, flight.id %>
-  <br>
-  <%= f.submit %>
-
-<% end %>
+  </div>
+</div>

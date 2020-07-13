@@ -39,9 +39,9 @@
             <thead>
               <tr>
                 <th></th>
+                <th class="f-index-th">From</th>
+                <th class="f-index-th">To</th>
                 <th class="f-index-th">Departing</th>
-                <th class="f-index-th">Arriving</th>
-                <th class="f-index-th">Leaving</th>
                 <th class="f-index-th">Arriving</th>
               </tr>
             </thead>
@@ -68,7 +68,7 @@
           <%= submit_tag "Book", id: "book-submit" %>
         <% end %>
 
-        <%= will_paginate @search_results, inner_window: 1, outer_window: 0, :previous_label => '◀', :next_label => '▶' %>
+        <%= will_paginate @search_results, page_links: false, :previous_label => '◀', :next_label => '▶' %>
       <% elsif @search_nil == true %>
         <h1 id="no-results">No flights found</h1>
       <% end %>

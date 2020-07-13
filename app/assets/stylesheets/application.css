@@ -186,3 +186,136 @@ body, html {
   padding: 20px;
   margin-top: 100px;
 }
+
+/* New Booking */
+#n-booking-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  margin-top: 100px;
+}
+
+#n-b-left {
+  padding-bottom: 10px;
+  background-color: rgb(0, 95, 150);
+  height: fit-content;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* #n-b-right {
+
+}
+
+#form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+} */
+
+#book-now {
+  background-color: rgb(0, 160, 160);
+  border: 3px solid rgb(0, 160, 160);
+  color: white;
+  width: 80%;
+  height: 50px;
+  font-size: 25px;
+}
+
+#book-now:hover {
+  border: 3px solid white;
+}
+
+.n-b-label {
+  font-size: 20px;
+  background-color: rgb(0, 95, 150);
+  padding: 5px;
+  border-radius: 100px;
+}
+
+.n-b-field {
+  background-color: rgb(0, 63, 102);
+  border: 3px solid rgb(0, 63, 102);
+  color: white;
+  font-size: 20px;
+  height: 30px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 70%;
+}
+
+.n-b-field:hover {
+  border: 3px solid white;
+}
+
+.n-b-passenger {
+  background-color: rgb(0, 95, 150);
+  border-radius: 100px;
+  margin: 0px;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 5px;
+}
+
+/* .one-pass-form {
+
+} */
+
+#n-b-title {
+  margin: 0px;
+  background-color: rgb(0, 63, 102);
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Will paginate */
+.pagination {
+  background-color: rgb(0, 63, 102);
+  padding: 10px;
+  font-size: 25px;
+}
+
+.previous_page.disabled {
+  background-color: rgb(0, 160, 160, 0.0);
+  border: 3px solid rgb(0, 160, 160, 0.0);
+}
+
+.previous_page.disabled:hover {
+  border: 3px solid rgb(0, 160, 160, 0.0);
+}
+
+.next_page.disabled {
+  background-color: rgb(0, 160, 160, 0.0);
+  border: 3px solid rgb(0, 160, 160, 0.0);
+}
+
+.next_page.disabled:hover {
+  border: 3px solid rgb(0, 160, 160, 0.0);
+}
+
+.next_page {
+  background-color: rgb(0, 160, 160);
+  border: 3px solid rgb(0, 160, 160);
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+}
+
+.next_page:hover {
+  border: 3px solid white;
+}
+
+.previous_page {
+  background-color: rgb(0, 160, 160);
+  border: 3px solid rgb(0, 160, 160);
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+}
+
+.previous_page:hover {
+  border: 3px solid white;
+}
