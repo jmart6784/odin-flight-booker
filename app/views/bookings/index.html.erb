@@ -1,4 +1,37 @@
-<h1>Bookings index</h1>
+<h1 id="b-i-title">All Bookings</h1>
+
+<div id="all-bookings">
+  <% @bookings.each do |booking| %>
+    <%= link_to booking, id: "b-i-show" do %>
+      <div id="booking-div">
+        <div id="b-i-from-to">
+          <h3 class="fr-to">
+            From: <%= Airport.find(Flight.find(booking.flight_id).departure_id).code %>
+          </h3>
+          <h3 class="fr-to">
+            To: <%= Airport.find(Flight.find(booking.flight_id).arrival_id).code %>
+          </h3>
+        </div>
+        <h4 class="b-i-info">
+          Departing: <%= Flight.find(booking.flight_id).start_date.strftime("%B %d %Y") + " " + Flight.find(booking.flight_id).start_time.strftime("%l:%M%p") %>
+        </h4>
+        <h4 class="b-i-info">
+          Arriving: <%= Flight.find(booking.flight_id).end_date.strftime("%B %d %Y") + " " + Flight.find(booking.flight_id).end_time.strftime("%l:%M%p") %>
+        </h4>
+        <h4 class="b-i-info">Booking ID: <%= booking.id %></h4>
+        <h4 class="b-i-info">Flight ID: <%= Flight.find(booking.flight_id).id %></h4>
+        <h4 id="p-count" class="b-i-info">Passengers: <%= booking.passengers.count %></h4>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="b-i-paginate">
+  <%= will_paginate @search_results, page_links: false, :previous_label => '◀', :next_label => '▶' %>
+</div>
+
+
+<% if false %>
 
 <table>
   <thead>
@@ -35,3 +68,5 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>
