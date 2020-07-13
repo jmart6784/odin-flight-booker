@@ -1,60 +1,77 @@
-<h1>Flights index</h1>
+<div id="index-container">
 
-<%= form_tag flights_path, method: :get do %>
-  <%= label_tag "search_flights[start_date]", "Flight date" %>
-  <%= select_tag "search_flights[start_date]", options_for_select(@valid_dates) %><br>
+  <div id="search-form-container">
+    <h1 id="search-title">Search Flights</h1>
 
-  <%= label_tag "search_flights[departure_id]", "From:" %>
-  <%= select_tag "search_flights[departure_id]", options_for_select(@airports) %><br>
+    <%= form_tag flights_path, method: :get do %>
+      <div id="search-form-div">
+        <div>
+          <%= label_tag "search_flights[start_date]", "Flight date", class: "search-label" %>
+          <%= select_tag "search_flights[start_date]", options_for_select(@valid_dates), class: "drp-dwn" %>
+        </div>
 
-  <%= label_tag "search_flights[arrival_id]", "To:" %>
-  <%= select_tag "search_flights[arrival_id]", options_for_select(@airports) %><br>
+        <div id="from-to-pass">
+          <div>
+            <%= label_tag "search_flights[departure_id]", "From", class: "search-label" %><br>
+            <%= select_tag "search_flights[departure_id]", options_for_select(@airports), class: "drp-dwn" %>
+          </div>
+          <div>
+            <%= label_tag "search_flights[arrival_id]", "To", class: "search-label" %><br>
+            <%= select_tag "search_flights[arrival_id]", options_for_select(@airports), class: "drp-dwn" %>
+          </div>
+          <div>
+            <%= label_tag "search_flights[passengers]", "Passengers", class: "search-label" %><br>
+            <%= select_tag "search_flights[passengers]", options_for_select(@passengers), class: "drp-dwn-pass" %>
+          </div>
+        </div>
 
-  <%= label_tag "search_flights[passengers]", "Passengers" %>
-  <%= select_tag "search_flights[passengers]", options_for_select(@passengers) %><br>
+        <%= submit_tag "Search", id: "search-btn" %>
+      </div>
+    <% end %>
+  </div>
 
-  <%= submit_tag "Search" %>
-<% end %>
+  <div id="search-results-div">
+    <div id="sr-div">
+      <% if @search_results.try(:any?) %>
+        <%= form_tag new_booking_path, method: :GET do %>
 
-<% if @search_results.try(:any?) %>
-  <%= form_tag new_booking_path, method: :GET do %>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th class="f-index-th">Departing</th>
+                <th class="f-index-th">Arriving</th>
+                <th class="f-index-th">Leaving</th>
+                <th class="f-index-th">Arriving</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @search_results.each do |flight| %>
+                <tr>
+                  <td id="td-radio">
+                    <%= radio_button_tag "booking[flight_id]", flight.id %>
+                  </td>
+                  <td class="index-text-td"><%= Airport.find(flight.departure_id).code %></td>
+                  <td class="index-text-td"><%= Airport.find(flight.arrival_id).code %></td>
+                  <td class="index-text-td">
+                    <%= flight.start_date.strftime("%B %d %Y") + " " + flight.start_time.strftime("%l:%M%p") %>
+                  </td>
+                  <td class="index-text-td">
+                    <%= flight.end_date.strftime("%B %d %Y") + " " + flight.end_time.strftime("%l:%M%p") %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= hidden_field_tag :passengers, params[:search_flights][:passengers] %>
 
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Departing</th>
-          <th>Arriving</th>
-          <th>Leaving</th>
-          <th>Arriving</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @search_results.each do |flight| %>
-          <tr>
-            <td>
-              <%= radio_button_tag "booking[flight_id]", flight.id %>
-            </td>
-            <td><%= Airport.find(flight.departure_id).code %></td>
-            <td><%= Airport.find(flight.arrival_id).code %></td>
-            <td>
-              <%= flight.start_date.strftime("%B %d %Y") + " " + flight.start_time.strftime("%l:%M%p") %>
-            </td>
-            <td>
-              <%= flight.end_date.strftime("%B %d %Y") + " " + flight.end_time.strftime("%l:%M%p") %>
-            </td>
-          </tr>
+          <%= submit_tag "Book", id: "book-submit" %>
         <% end %>
-      </tbody>
-    </table>
-    <%= hidden_field_tag :passengers, params[:search_flights][:passengers] %>
 
-    <%= submit_tag "Book" %>
-  <% end %>
-
-  <%= will_paginate @search_results, inner_window: 1, outer_window: 0, :previous_label => '◀', :next_label => '▶' %>
-<% elsif @search_nil == true %>
-  <h1>No flights found</h1>
-<% else %>
-  <h1>Search for flights!</h1>
-<% end %>
+        <%= will_paginate @search_results, inner_window: 1, outer_window: 0, :previous_label => '◀', :next_label => '▶' %>
+      <% elsif @search_nil == true %>
+        <h1 id="no-results">No flights found</h1>
+      <% end %>
+    </div>
+  </div>
+</div>
