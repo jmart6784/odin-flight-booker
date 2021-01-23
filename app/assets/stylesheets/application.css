@@ -155,9 +155,9 @@ body, html {
   padding: 10px;
 }
 
-.drp-dwn:hover {
+/* .drp-dwn:hover {
   border: 3px solid white;
-}
+} */
 
 .drp-dwn-pass {
   background-color: rgb(0, 63, 102);
@@ -181,9 +181,9 @@ body, html {
   font-size: 25px;
 }
 
-#search-btn:hover {
+/* #search-btn:hover {
   border: 3px solid white;
-}
+} */
 
 #index-container {
   display: grid;
@@ -229,10 +229,6 @@ body, html {
   margin-top: 20px;
 }
 
-#book-submit:hover {
-  border: 3px solid white;
-}
-
 #no-results {
   padding: 20px;
   margin-top: 100px;
@@ -263,10 +259,6 @@ body, html {
   font-size: 25px;
 }
 
-#book-now:hover {
-  border: 3px solid white;
-}
-
 .n-b-label {
   font-size: 20px;
   background-color: rgb(0, 95, 150);
@@ -283,10 +275,6 @@ body, html {
   margin-bottom: 10px;
   margin-top: 10px;
   width: 70%;
-}
-
-.n-b-field:hover {
-  border: 3px solid white;
 }
 
 .n-b-passenger {
